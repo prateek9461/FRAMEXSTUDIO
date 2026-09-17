@@ -1,0 +1,24 @@
+FRAME X STUDIO — SENIOR CODE AUDIT
+
+Validated / fixed:
+- Fixed GSAP console warning caused by passing HTMLCollection directly to gsap.from(); now uses Array.from(grid.children).
+- Made Lenis startup resilient if GSAP CDN fails.
+- Added safe WebGL fallback for devices without usable WebGL.
+- Removed unnecessary preserveDrawingBuffer and capped WebGL pixel ratio for lower GPU cost.
+- Externalized 17 embedded MP4 data-URIs and 29 base64 images into local assets/media files.
+- Reduced HTML payload from ~78.3 MiB to ~105 KiB before external media.
+- Page-2 videos use preload=none to avoid downloading all portfolio videos immediately.
+- Removed duplicate attributes from work-marquee video markup.
+- Added CDN preconnect hints.
+- Added Vercel security headers (CSP, clickjacking protection, nosniff, referrer policy, permissions policy, COOP).
+- Preserved existing visual layout/content, Page-2 9-video bundle, Page-1 stats/showreel, Page-5 changes, Instagram/Email links.
+
+Static validation:
+- 9/9 non-JSON JavaScript blocks pass node --check.
+- No eval/new Function/document.write/iframe/object/embed usage found.
+- All bundled Page-2 video files are present.
+- robots.txt and sitemap.xml included.
+
+Deployment note:
+- Run the site over HTTPS/Vercel rather than opening HTML via file:// for final verification.
+- Third-party JS remains pinned to GSAP 3.12.5, Lenis 1.1.14, and Three.js r128 CDN URLs; network access was unavailable during this audit, so no unverified SRI hashes were added.
